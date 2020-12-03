@@ -7,6 +7,9 @@ import '../utils/hover_extension.dart';
 class HeaderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final bool isSmall = width < 950;
+    final imageWidth = width * 0.47;
     return ResponsiveBuilder(
       builder: (_, size) {
         if (size.isMobile) return HeaderMobileView();
@@ -20,11 +23,10 @@ class HeaderView extends StatelessWidget {
                 Expanded(
                   child: HeaderBody(),
                 ),
-                Expanded(
-                  child: FlutterLogo(
-                    size: 300.0,
-                  ),
-                )
+                Image.asset(
+                  'assets/images/rishu.png',
+                  height: isSmall ? imageWidth : 400,
+                ),
               ],
             ),
           ),
@@ -103,8 +105,10 @@ class HeaderMobileView extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 40.0),
       child: Column(
         children: [
-          FlutterLogo(size: height * 0.3),
-          Spacer(),
+          Expanded(
+            child: Image.asset('assets/images/rishu.png'),
+          ),
+          //   Spacer(),
           HeaderBody(
             isMobile: true,
           ),
